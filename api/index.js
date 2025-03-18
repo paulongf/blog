@@ -10,7 +10,8 @@ const app = express();
 
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
-const secret = 'secretKeyword'
+const secret = 'secretKeyword';
+app.use(cookieParser())
 
 mongoose.connect('mongodb+srv://paulongf:tntFYLvIy2mmZrUi@cluster0.w8qeg.mongodb.net/');
 
@@ -48,13 +49,24 @@ app.post('/login', async (req, res) => {
     jwt.sign({ username, id: userDoc._id }, secret, { expiresIn: '1h' }, (err, token) => {
         if (err) throw err;
         
-        res.cookie('token', token, {
-            httpOnly: true, // Impede acesso via JavaScript no browser (mais seguro)
-            secure: true, // Apenas em HTTPS (remova para testes locais)
-            sameSite: 'None' // Importante para funcionamento correto com frontend externo
-        }).json({ success: true });
+        res.cookie('token', token).json({
+            id: userDoc._id,
+            username,
+        });
     }); 
 });
+
+app.get('/profile', (req, res) =>{
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err, info)=>{
+        if(err) throw err;
+        res.json(info);
+    })
+})
+
+app.post('/logout', (req, res) =>{
+    res.cookie('token', '').json('')
+})
 
 
 app.listen(4000);
