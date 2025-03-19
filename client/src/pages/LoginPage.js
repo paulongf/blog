@@ -20,22 +20,19 @@ export default function LoginPage(){
             });
     
             if (response.ok) {
-                response.json().then(userInfo =>{
-                    setUserInfo(userInfo);
-                    setRedirect(true);
-                })
-                const data = await response.json();
-                console.log('Login successful:', data);
-               
+                const userInfo = await response.json();  // Chamada única do response.json()
+                setUserInfo(userInfo);
+                setRedirect(true);
+                console.log('Login successful:', userInfo);
             } else {
                 const error = await response.json();
                 console.error('Login failed:', error);
             }
-                       
         } catch (err) {
             console.error('Error during login:', err);
         }
     }
+    
     
     if(redirect){
         return <Navigate to={'/'}/>

@@ -7,6 +7,7 @@ import IndexPage from "./pages/IndexPage.js";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { UserContextProvider } from './UserContext.js';
+import CreatePost from './pages/CreatePost.js';
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<IndexPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path='/create' element={<CreatePost/>}/>
         </Route>
       </Routes>
     </UserContextProvider>
