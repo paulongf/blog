@@ -2,16 +2,26 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import User from './models/User.js';
+import Post from './models/Post.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { info } from 'console';
 
 const app = express();
+const uploadMiddleware = multer({dest: 'uploads/'});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
 const secret = 'secretKeyword';
-app.use(cookieParser())
+app.use(cookieParser());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 mongoose.connect('mongodb+srv://paulongf:tntFYLvIy2mmZrUi@cluster0.w8qeg.mongodb.net/');
 
@@ -62,10 +72,53 @@ app.get('/profile', (req, res) =>{
         if(err) throw err;
         res.json(info);
     })
-})
+});
 
 app.post('/logout', (req, res) =>{
     res.cookie('token', '').json('')
+});
+
+app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    }
+
+    const { originalname, path: tempPath, filename } = req.file;
+    const ext = originalname.split('.').pop();
+    const newPath = `${tempPath}.${ext}`;
+    const { title, summary, content } = req.body;
+
+    try {
+        fs.renameSync(tempPath, newPath);
+        const { token } = req.cookies;
+
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ error: 'Token inválido' });
+            }
+
+            const postDoc = await Post.create({
+                title,
+                summary,
+                content,
+                cover: newPath,
+                author: info.id,
+            });
+
+            res.json({ postDoc });  // ✅ Envia a resposta apenas uma vez
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao renomear o arquivo', details: err.message });
+    }
+});
+
+app.get('/post', async (req,res) => {
+    res.json(await Post.find()
+    .populate('author', ['username'])
+    .sort({createdAt: -1})
+    .limit(20)
+);
 })
 
 
