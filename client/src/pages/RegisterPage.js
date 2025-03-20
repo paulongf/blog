@@ -4,13 +4,15 @@ export default function RegisterPage(){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
 
     async function register(ev) {
         ev.preventDefault();
     
           const response =  await fetch('http://localhost:4000/register', {
                 method: 'POST',
-                body: JSON.stringify({username, password}),
+                body: JSON.stringify({username, password, email, phone}),
                 headers: {'Content-Type':'application/json'},
             });
             if(response.status === 200){
@@ -30,6 +32,16 @@ export default function RegisterPage(){
             value={username}
             onChange={ev => setUsername(ev.target.value)}
             />
+             <input type="email"
+             placeholder="Email"
+             value={email}
+             onChange={ev => setEmail(ev.target.value)}
+             />
+              <input type="phone"
+             placeholder="Phone"
+             value={phone}
+             onChange={ev => setPhone(ev.target.value)}
+             />
             <input type="password"
              placeholder="Password"
              value={password}

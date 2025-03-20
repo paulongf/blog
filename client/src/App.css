@@ -44,6 +44,7 @@ a{
 }
 body{
   color: #222;
+  background-color: #F7F7F7;
 }
 img{
   max-width: 100%;
@@ -71,6 +72,7 @@ header a.logo{
 header nav{
   display:flex;
   gap: 24px;
+  font-size: .8rem;
 }
 
 div.post{
@@ -184,7 +186,7 @@ div.post-page a.edit-btn{
   align-items: center;
   gap: 5px;
   color: #fff;
-  padding:15px 30px;
+  padding:10px 20px;
   border-radius: 5px;
   text-decoration: none;
 }

@@ -29,7 +29,9 @@ export default function Header(){
 
     return(
         <header>
-           <Link to="/" className="logo">MyBlog</Link> 
+           <Link to="/" className="logo">
+           <img src="/logo-palmeiras.jpg" alt="Logo" style={{ height: '80px', width: '80px', padding: '0', margin: '0' }} />
+           </Link> 
            <nav>
             {username && (
                 <>
