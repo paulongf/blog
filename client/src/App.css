@@ -53,6 +53,7 @@ main{
   max-width: 960px;
   margin: 0 auto;
 }
+<<<<<<< HEAD
 header {
   background-color: #f6f6f6;;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -63,6 +64,27 @@ header {
   z-index: 1000;
   padding: 10px 0;
   margin-bottom: 20px;
+=======
+header{
+  display:flex;
+  justify-content:space-between;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+header a{
+  text-decoration:none;
+  color: inherit;
+}
+header a.logo{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+header nav{
+  display:flex;
+  gap: 24px;
+  font-size: .8rem;
+>>>>>>> main
 }
 
 .header-container {
