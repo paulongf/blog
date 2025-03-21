@@ -26,13 +26,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 mongoose.connect('mongodb+srv://paulongf:tntFYLvIy2mmZrUi@cluster0.w8qeg.mongodb.net/');
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email, phone } = req.body;
     try {
         const hashedPassword = bcrypt.hashSync(password, 10); // Criptografa a senha antes de armazená-la
 
         const userDoc = await User.create({
             username, 
-            password: hashedPassword  // Armazena o hash da senha, não a senha em texto simples
+            password: hashedPassword,  // Armazena o hash da senha, não a senha em texto simples
+            email,
+            phone,
         });
         
         res.json(userDoc);
