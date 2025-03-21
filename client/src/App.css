@@ -43,38 +43,80 @@ a{
   cursor: pointer;
 }
 body{
+  background-color: #D0E8DC; /* Verde bem claro */
   color: #222;
-  background-color: #F7F7F7;
 }
 img{
   max-width: 100%;
 }
 main{
-  padding: 10px;
   max-width: 960px;
   margin: 0 auto;
 }
-header{
-  display:flex;
-  justify-content:space-between;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  align-items: center;
-}
-header a{
-  text-decoration:none;
-  color: inherit;
-}
-header a.logo{
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-header nav{
-  display:flex;
-  gap: 24px;
-  font-size: .8rem;
+header {
+  background-color: #f6f6f6;;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px 0;
+  margin-bottom: 20px;
 }
 
+.header-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: .6rem;
+  color: #006437; /* Verde do Palmeiras */
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+header nav a:hover {
+  color: #007bff;
+}
+
+header nav a:last-child {
+  cursor: pointer;
+}
+
+header nav a:last-child:hover {
+  color: #007bff;
+}
 div.post{
   display: grid;
   grid-template-columns: 1fr;
@@ -88,27 +130,32 @@ div.post{
 }
 
 div.post div.texts h2{
-  margin:0;
-  font-size: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #006437; /* Verde do Palmeiras */
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 div.post div.texts a{
-  text-decoration:none;
+  text-decoration: none;
   color: inherit;
 }
 div.post p.info{
-  margin:24px 0;
-  color: #888;
-  font-size:1rem;
+  color: #777;
+  font-size: .6rem;
   font-weight: bold;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 div.post p.info a.author{
-  color:#333;
+  color: #006437;
+  font-weight: bold;
 }
 div.post p.summary{
-  margin:10px 0;
-  line-height: 1.8rem;
+  color: #444;
+  line-height: 1.6rem;
+  font-size: .8rem;
 }
 
 form.login, form.register{
@@ -138,16 +185,21 @@ form.login h1, form.register h1{
   text-align: center;
 }
 
-div.post-page div.image{
-  max-height:300px;
-  display: flex;
-  overflow:hidden;
-}
-div.post-page div.image img{
-  object-fit: cover;
-  object-position: center center;
+div.post .image {
   width: 100%;
+  height: 200px; /* Ajuste a altura conforme necessário */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+div.post .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorção */
+}
+
 div.post-page a{
   color:#333;
   text-decoration: underline;

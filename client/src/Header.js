@@ -29,25 +29,24 @@ export default function Header(){
 
     return(
         <header>
-           <Link to="/" className="logo">
-           <img src="/logo-palmeiras.jpg" alt="Logo" style={{ height: '80px', width: '80px', padding: '0', margin: '0' }} />
-           </Link> 
-           <nav>
-            {username && (
-                <>
-                <Link to="/create">Create new post</Link>
-                <a onClick={logout}>Logout</a>
-                </>
-            )}
-            {
-                !username && (
+        <div className="header-container">
+            <Link to="/" className="logo">
+                <img src="/logo-palmeiras.jpg" alt="Logo" />
+            </Link>
+            <nav>
+                {username ? (
                     <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                        <Link to="/create">Create new post</Link>
+                        <a onClick={logout}>Logout</a>
                     </>
-                )
-            }
-           </nav>
-        </header>
+                ) : (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                    </>
+                )}
+            </nav>
+        </div>
+    </header>
     )
 }
