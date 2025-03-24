@@ -1,34 +1,26 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
-    "@testing-library/user-event": "^13.2.1",
-    "bootstrap": "^5.3.3",
-    "date-fns": "^4.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-quill": "2.0.0",
-    "react-quill-new": "^3.4.1",
-    "react-router-dom": "^7.3.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.0"
-  },
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Projeto Blog",
+  "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "date-fns": "^4.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-quill-new": "^3.4.4",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^4.2.4"
   },
+  "devDependencies": {},
+  "license": "MIT",
   "browserslist": {
     "production": [
       ">0.2%",

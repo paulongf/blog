@@ -13,10 +13,10 @@ export default function IndexPage() {
  
   return (
 
-        <>
-        {posts.length > 0 && posts.map(post =>(
-         <Post key={post._id} {...post} /> 
-        ))}
-        </>
+    <div className="posts-container container"> {/* Adicionando a classe aqui */}
+    {posts.length > 0 && posts.map(post => (
+      <Post key={post._id} {...post} />
+    ))}
+  </div>
   );
 }

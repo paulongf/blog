@@ -20,7 +20,7 @@ export default function PostPage(){
 
 
     return(
-        <div className="post-page">
+        <div className="post-page container">
             <h1>{postInfo.title}</h1>
             <time>
                 {postInfo.createdAt ? format(new Date(postInfo.createdAt), "dd/MM/yyyy HH:mm") : "Data indisponível"}
