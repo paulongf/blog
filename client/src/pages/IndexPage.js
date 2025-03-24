@@ -1,6 +1,7 @@
 import Post from "../Post";
 import {useEffect, useState} from "react";
 
+
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
   useEffect(()=>{
@@ -13,7 +14,7 @@ export default function IndexPage() {
  
   return (
 
-    <div className="posts-container container"> {/* Adicionando a classe aqui */}
+    <div className="posts-container container "> 
     {posts.length > 0 && posts.map(post => (
       <Post key={post._id} {...post} />
     ))}

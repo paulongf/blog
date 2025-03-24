@@ -10,6 +10,8 @@ import { UserContextProvider } from './UserContext.js';
 import CreatePost from './pages/CreatePost.js';
 import PostPage from './pages/PostPage.js';
 import EditPost from './pages/EditPost.js';
+import WhoAreWe from './pages/WhoAreWe.js';
+import Contact from './pages/Contact.js';
 
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route path='/create' element={<CreatePost/>}/>
           <Route path='/post/:id' element={<PostPage/>}/>
           <Route path='/edit/:id' element={<EditPost/>}/>
+          <Route path='/who' element={<WhoAreWe/>}/>
+          <Route path='/contact' element={<Contact/>}/>
         </Route>
       </Routes>
     </UserContextProvider>

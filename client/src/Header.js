@@ -40,11 +40,19 @@ export default function Header(){
             <nav>
                 {username ? (
                     <>
+                        <Link to="/who">Quem somos</Link>
+                        <Link>Parcerias</Link>
+                        <Link>Eventos</Link>
+                        <Link to="/contact">Contacto</Link>
                         <Link to="/create">Create new post</Link>
                         <a onClick={logout}>Logout</a>
                     </>
                 ) : (
                     <>
+                        <Link to="/who">Quem somos</Link>
+                        <Link>Parcerias</Link>
+                        <Link>Eventos</Link>
+                        <Link to="/contact">Contacto</Link>
                         <Link to="/login">Login</Link>
                         <Link to="/register">Register</Link>
                     </>
@@ -52,5 +60,6 @@ export default function Header(){
             </nav>
         </div>
     </header>
+    
     )
 }

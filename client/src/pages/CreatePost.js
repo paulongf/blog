@@ -4,6 +4,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import {Navigate} from "react-router-dom";
 import Editor from '../Editor';
 
+
 export default function CreatePost(){
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
@@ -35,7 +36,8 @@ export default function CreatePost(){
    
 
     return(
-        <form onSubmit={createNewPost}>
+        <div className='container register'>
+          <form className='create-post' onSubmit={createNewPost}>
             <input type="text" placeholder="Title" 
             value={title} 
             onChange={ev => setTitle(ev.target.value)}/>
@@ -54,5 +56,6 @@ export default function CreatePost(){
             />
             <button style={{marginTop:'5px'}}>Create post</button>
         </form>
+        </div>
     );
 }

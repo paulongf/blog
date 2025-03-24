@@ -1,34 +1,34 @@
 import { useState } from "react";
 
-export default function RegisterPage(){
+export default function Contact(){
 
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    async function register(ev) {
+    async function sendMessage(ev) {
         ev.preventDefault();
     
-          const response =  await fetch('http://localhost:4000/register', {
+          const response =  await fetch('http://localhost:4000/contact', {
                 method: 'POST',
-                body: JSON.stringify({username, password, email, phone}),
+                body: JSON.stringify({username, message, email, phone}),
                 headers: {'Content-Type':'application/json'},
             });
             if(response.status === 200){
-                alert('Registration successful.');
+                alert('Message successful.');
             }
             else{
-                alert('Registration failed.');
+                alert('Message failed.');
             }
        
 
     }
     return(
-        <form className="register" onSubmit={register}>
-            <h1 className="text-white">Register</h1>
+        <form className="register" onSubmit={sendMessage}>
+            <h1 className="text-white">Contacto</h1>
             <input type="text" 
-            placeholder="Username" 
+            placeholder="Nome" 
             value={username}
             onChange={ev => setUsername(ev.target.value)}
             />
@@ -42,12 +42,13 @@ export default function RegisterPage(){
              value={phone}
              onChange={ev => setPhone(ev.target.value)}
              />
-            <input type="password"
-             placeholder="Password"
-             value={password}
-             onChange={ev => setPassword(ev.target.value)}
+              <textarea type="text" className="text-area"
+             placeholder="Mensagem" rows={6}
+             value={message}
+             onChange={ev => setMessage(ev.target.value)}
              />
-            <button>Register</button>
+        
+            <button>Enviar mensagem</button>
         </form>
     )
 }
