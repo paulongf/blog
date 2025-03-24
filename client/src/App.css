@@ -43,9 +43,11 @@ a{
   cursor: pointer;
 }
 body{
-  background-color: #D0E8DC; /* Verde bem claro */
+  background-color: #006437; /* Verde bem claro */
   color: #222;
+  margin-bottom: 15px;
 }
+
 img{
   max-width: 100%;
 }
@@ -65,13 +67,15 @@ header {
   position: sticky;
   top: 0;
   left: 0;
-  width: 100vw; /* 100% da largura da tela */
+  width: 100%; /* 100% da largura da tela */
   z-index: 1000;
   padding: 10px 0;
   margin-bottom: 20px;
   margin-left: 0; /* Remover qualquer margem esquerda */
   margin-right: 0; /* Remover qualquer margem direita */
 }
+
+
 
 
 header a{
@@ -145,7 +149,94 @@ header nav a:last-child:hover {
   display: grid;
   grid-template-columns: 1fr; /* Por padrão, uma coluna */
   gap: 20px;
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+
+.intro-container{
   padding: 20px;
+  background-color: #F6F6F6;
+  border-radius: 8px;
+}
+
+.title-home{
+  color: #006437;
+}
+
+.subtitle-home{
+  color: #777;
+}
+.text-home{
+  color: #006437;
+  padding-right: 20px;
+}
+
+.intro-wrapper{
+  display: flex;
+}
+
+.home-content{
+  display: flex;
+  background-color: #F6F6F6;
+  padding: 20px;
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.footer{
+  text-align: center;
+  padding: 10px;
+  background-color: #f6f6f6; /* Verde do Palmeiras */
+  color: #006437;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-top-space{
+  height: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  .home-content {
+    display: flex;
+    flex-direction: column-reverse; /* Muda para coluna em telas pequenas */
+  }
+}
+
+.create-post{
+  background-color: white;
+  padding: 50px;
+  border-radius: 8px;
+}
+
+.text-area{
+  width: 400px;
+  border-radius: 8px;
+}
+
+.text-white{
+  color: #F6F6F6;
+}
+
+.home-content img {
+  max-width: 300px;
+  height: auto;
+}
+
+@media screen and (max-width: 700px) {
+  .intro-wrapper {
+    display: flex;
+    flex-direction: column-reverse; /* Muda para coluna em telas pequenas */
+  }
+}
+
+.big-logo{
+  max-width: 250px;
+  max-height: 250px;
 }
 
 @media screen and (min-width: 700px) {

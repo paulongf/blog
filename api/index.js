@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import User from './models/User.js';
+import UserMessage from './models/UserMessage.js'
 import Post from './models/Post.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -33,6 +34,24 @@ app.post('/register', async (req, res) => {
         const userDoc = await User.create({
             username, 
             password: hashedPassword,  // Armazena o hash da senha, não a senha em texto simples
+            email,
+            phone,
+        });
+        
+        res.json(userDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.post('/contact', async (req, res) => {
+    const { username, message, email, phone } = req.body;
+    try {
+
+
+        const userDoc = await UserMessage.create({
+            username, 
+            message,  // Armazena o hash da senha, não a senha em texto simples
             email,
             phone,
         });
