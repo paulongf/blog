@@ -3,7 +3,7 @@ export default function Footer() {
 
     return (
         <div>
-            <div className="footer-top-space"></div>
+            <div className="footer-top-space mt-3"></div>
         <footer className="footer">
             &copy; {currentYear} Palmeiras Porto. Todos os direitos reservados.
         </footer>

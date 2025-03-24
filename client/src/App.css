@@ -43,9 +43,8 @@ a{
   cursor: pointer;
 }
 body{
-  background-color: #006437; /* Verde bem claro */
+  background-color: #006437 !important; 
   color: #222;
-  margin-bottom: 15px;
 }
 
 img{
@@ -66,14 +65,12 @@ header {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  left: 0;
-  width: 100%; /* 100% da largura da tela */
+  width: 100%;
   z-index: 1000;
   padding: 10px 0;
   margin-bottom: 20px;
-  margin-left: 0; /* Remover qualquer margem esquerda */
-  margin-right: 0; /* Remover qualquer margem direita */
 }
+
 
 
 
@@ -100,11 +97,10 @@ header nav{
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-
 }
 
 .logo img {
-  height: 50px;
+  height: 70px;
   width: auto;
   transition: transform 0.3s ease-in-out;
 }
@@ -120,7 +116,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #333;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
@@ -128,7 +124,7 @@ nav a {
 
 header nav a {
   text-decoration: none;
-  font-size: .6rem;
+  font-size: .8rem;
   color: #006437; /* Verde do Palmeiras */
   font-weight: bold;
   transition: color 0.3s ease-in-out;
@@ -197,7 +193,7 @@ header nav a:last-child:hover {
 }
 
 .footer-top-space{
-  height: 20px;
+  padding: 20px;
 }
 
 @media screen and (max-width: 700px) {
@@ -225,6 +221,23 @@ header nav a:last-child:hover {
 .home-content img {
   max-width: 300px;
   height: auto;
+}
+
+.text-green{
+  color: #006437 !important;
+  font-weight: bold;
+}
+
+.navbar-expand-lg .navbar-nav {
+  flex-direction: row;
+  gap: 15px;
+}
+
+@media screen and (max-width: 700px) {
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -261,6 +274,13 @@ div.post div.texts a{
 .post{
   background-color: #F6F6F6;
   border-radius: 8px;
+}
+
+.post-page{
+  background-color: #F6F6F6;
+  padding: 20px;
+  border-radius: 8px;
+  color: #006437;
 }
 
 .texts{
