@@ -304,6 +304,18 @@ div.post p.summary{
   font-size: .8rem;
 }
 
+.login{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 form.login, form.register{
   max-width: 400px;
   margin: 0 auto;
@@ -317,15 +329,22 @@ input{
   border-radius: 5px;
   background-color: #fff;
 }
-button{
+button {
   cursor: pointer;
   width: 100%;
   display: block;
-  background-color: #555;
-  border:0;
-  color: #fff;
+  background-color: #A3D9A5;
+  border: 2px solid #006437;
+  color: red;
   border-radius: 5px;
   padding: 7px 0;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #94C894; /* Um tom ligeiramente mais escuro */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
 }
 form.login h1, form.register h1{
   text-align: center;
