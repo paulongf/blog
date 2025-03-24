@@ -5,18 +5,22 @@ import { UserContext } from "./UserContext";
 
 export default function Header(){
     const {setUserInfo, userInfo} = useContext(UserContext);
-    useEffect(()=>{
-        fetch('http://localhost:4000/profile',
-            {
-                credentials: 'include',
-
-            }).then(response => {
-                response.json().then(userInfo => { 
-                    setUserInfo(userInfo)  
-                })
+    useEffect(() => {
+        fetch('http://localhost:4000/profile', {
+            credentials: 'include',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((userInfo) => {
+                        setUserInfo(userInfo);
+                    });
+                } else {
+                    console.error('Erro ao buscar perfil', response);
+                }
             })
+            .catch((error) => console.error('Erro de rede', error));
     }, []);
-
+    
     function logout(){
         fetch('http://localhost:4000/logout', {
             credentials: 'include',

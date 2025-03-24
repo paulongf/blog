@@ -68,12 +68,20 @@ app.post('/login', async (req, res) => {
     }); 
 });
 
-app.get('/profile', (req, res) =>{
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err, info)=>{
-        if(err) throw err;
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies;
+
+    if (!token) {
+        return res.status(200).json(null); // ✅ Retorna null em vez de erro
+    }
+
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) {
+            console.error("Erro ao verificar token:", err);
+            return res.status(403).json({ error: "Token inválido" });
+        }
         res.json(info);
-    })
+    });
 });
 
 app.post('/logout', (req, res) =>{
