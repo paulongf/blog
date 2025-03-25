@@ -8,6 +8,7 @@ export default function EventPage() {
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
     const [redirect, setRedirect] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:4000/event/${id}`)
@@ -52,7 +53,6 @@ export default function EventPage() {
                 {eventInfo.date ? format(new Date(eventInfo.date), "dd/MM/yyyy") : "Data indisponível"}
             </time>
            </div>
-            {/* Alterei 'author' para 'organizer' */}
             <div className="author">by @{eventInfo.organizer?.username || 'Autor desconhecido'}</div>
             {userInfo.id === eventInfo.organizer?._id && (
                 <div className="edit-row">
@@ -62,7 +62,7 @@ export default function EventPage() {
                         </svg>
                         Edit this event
                     </Link>
-                    <Link className="delete-btn" onClick={deleteEvent}>
+                    <Link className="delete-post-btn"  onClick={() => setShowModal(true)}>
                     X Delete event</Link>
                 </div>
             )}
@@ -70,6 +70,30 @@ export default function EventPage() {
                 <img src={`http://localhost:4000/${eventInfo.cover}`} alt={eventInfo.title} />
             </div>
             <div className="content" dangerouslySetInnerHTML={{ __html: eventInfo.description }} />
+         {/* Modal de Confirmação */}
+         {showModal && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Confirmar Exclusão</h5>
+                                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Tem certeza de que deseja excluir este evento?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                                    Cancelar
+                                </button>
+                                <button type="button" className="btn btn-danger" onClick={() => { deleteEvent(); setShowModal(false); }}>
+                                    Deletar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
