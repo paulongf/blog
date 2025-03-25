@@ -17,6 +17,7 @@ import CreateEvent from './pages/CreateEvent.js';
 import EventsPage from './pages/EventsPage.js';
 import EventPage from './pages/EventPage.js';
 import EditEvent from './pages/EditEvent.js';
+import Sponsors from './pages/Sponsors.js';
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/create-event' element={<CreateEvent/>} />
           <Route path='event/:id' element={<EventPage/>}/>
           <Route path='edit-event/:id' element={<EditEvent/>}/>
+          <Route path='/sponsors' element={<Sponsors/>}/>
         </Route>
       </Routes>
     </UserContextProvider>

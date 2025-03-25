@@ -61,7 +61,7 @@ export default function Header() {
                     <Link to="/who">Quem somos</Link>
                   </li>
                   <li className="nav-item">
-                    <Link >Parcerias</Link>
+                    <Link to="/sponsors">Parcerias</Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/events">Eventos</Link>
@@ -90,7 +90,7 @@ export default function Header() {
                     <Link to="/who" >Quem somos</Link>
                   </li>
                   <li className="nav-item">
-                    <Link >Parcerias</Link>
+                    <Link to="/sponsors">Parcerias</Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/events">Eventos</Link>
