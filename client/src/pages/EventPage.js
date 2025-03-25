@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';  // Importando React e os hooks necessários
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { UserContext } from '../UserContext';
 
@@ -7,6 +7,7 @@ export default function EventPage() {
     const [eventInfo, setEventInfo] = useState(null);
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:4000/event/${id}`)
@@ -16,6 +17,22 @@ export default function EventPage() {
                 });
             });
     }, [id]);
+
+    async function deleteEvent() {
+        const response = await fetch(`http://localhost:4000/event/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+    
+        if (response.ok) {
+            setRedirect(true);
+        } else {
+            console.error('Erro ao deletar evento');
+        }
+    }
+    if (redirect) {
+        return <Navigate to={`/`} />;
+      }
 
     if (!eventInfo) return '';
 
@@ -45,6 +62,8 @@ export default function EventPage() {
                         </svg>
                         Edit this event
                     </Link>
+                    <Link className="delete-btn" onClick={deleteEvent}>
+                    X Delete event</Link>
                 </div>
             )}
             <div className="image">

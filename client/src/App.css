@@ -105,6 +105,11 @@ header nav{
   transition: transform 0.3s ease-in-out;
 }
 
+.image{
+  display: flex;
+  justify-content: center;
+}
+
 .logo img:hover {
   transform: scale(1.1);
 }
