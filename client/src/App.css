@@ -207,6 +207,9 @@ header nav a:last-child:hover {
   background-color: white;
   padding: 50px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .text-area{
@@ -399,6 +402,9 @@ div.content li{
 div.edit-row{
   text-align: center;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 div.post-page a.edit-btn{
   background-color: #333;
@@ -409,6 +415,31 @@ div.post-page a.edit-btn{
   padding:10px 20px;
   border-radius: 5px;
   text-decoration: none;
+}
+
+.event-address{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-date{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn{
+  background-color: red;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff !important;
+  padding:10px 20px;
+  border-radius: 5px;
+  text-decoration: none !important;
 }
 a svg{
   height:20px;

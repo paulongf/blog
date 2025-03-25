@@ -12,6 +12,11 @@ import PostPage from './pages/PostPage.js';
 import EditPost from './pages/EditPost.js';
 import WhoAreWe from './pages/WhoAreWe.js';
 import Contact from './pages/Contact.js';
+import Events from './pages/EventsPage.js';
+import CreateEvent from './pages/CreateEvent.js';
+import EventsPage from './pages/EventsPage.js';
+import EventPage from './pages/EventPage.js';
+import EditEvent from './pages/EditEvent.js';
 
 
 
@@ -29,6 +34,10 @@ function App() {
           <Route path='/edit/:id' element={<EditPost/>}/>
           <Route path='/who' element={<WhoAreWe/>}/>
           <Route path='/contact' element={<Contact/>}/>
+          <Route path='/events' element={<EventsPage/>}/>
+          <Route path='/create-event' element={<CreateEvent/>} />
+          <Route path='event/:id' element={<EventPage/>}/>
+          <Route path='edit-event/:id' element={<EditEvent/>}/>
         </Route>
       </Routes>
     </UserContextProvider>

@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import {format} from 'date-fns';
 import { UserContext } from "../UserContext";
 
 export default function PostPage(){
     const [postInfo, setPostInfo] = useState(null);
-    const {userInfo} = useContext(UserContext)
+    const {userInfo} = useContext(UserContext);
     const {id} = useParams();
+    const [redirect, setRedirect] = useState(false);
     useEffect(()=> {
         fetch(`http://localhost:4000/post/${id}`)
         .then(response =>{
@@ -15,6 +16,22 @@ export default function PostPage(){
             });
         })
     }, []);
+
+    async function deletePost() {
+        const response = await fetch(`http://localhost:4000/post/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+    
+        if (response.ok) {
+            setRedirect(true);
+        } else {
+            console.error('Erro ao deletar post');
+        }
+    }
+    if (redirect) {
+        return <Navigate to={`/`} />;
+      }
 
     if (!postInfo) return '';
 
@@ -34,6 +51,8 @@ export default function PostPage(){
                    </svg>
                    Edit this post
                  </Link>
+                 <Link className="delete-btn" onClick={deletePost}>
+                 X Delete post</Link>
                </div>
             )}
             <div className="image">

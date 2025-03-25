@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import User from './models/User.js';
 import UserMessage from './models/UserMessage.js'
 import Post from './models/Post.js'
+import Event from './models/Event.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
@@ -66,6 +67,7 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     
     const userDoc = await User.findOne({ username });
+    
     
     if (!userDoc) {
         return res.status(400).json({ error: 'User not found' });
@@ -185,6 +187,34 @@ app.put('/post/:id', uploadMiddleware.single('file'), async (req, res) => {
     }
 });
 
+app.delete('/post/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ error: 'Token inválido' });
+            }
+
+            const postDoc = await Post.findById(id);
+            if (!postDoc) {
+                return res.status(404).json({ error: 'Post não encontrado' });
+            }
+
+            if (postDoc.author.toString() !== info.id) {
+                return res.status(403).json({ error: 'Acesso negado' });
+            }
+
+            await Post.deleteOne({ _id: id });
+
+            res.json({ message: 'Post deletado com sucesso' });
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao deletar post', details: err.message });
+    }
+});
+
 
 app.get('/post', async (req,res) => {
     res.json(await Post.find()
@@ -199,6 +229,133 @@ app.get('/post/:id', async (req, res) => {
     const postDoc = await Post.findById(id).populate('author', ['username']);
     res.json(postDoc);
   })
+
+
+  app.post('/event', uploadMiddleware.single('file'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Nenhuma imagem enviada.' });
+    }
+
+    const { originalname, path: tempPath } = req.file;
+    const ext = originalname.split('.').pop();
+    const newPath = `${tempPath}.${ext}`;
+    const { title, description,summary, date, location } = req.body;
+
+    try {
+        fs.renameSync(tempPath, newPath);
+        const { token } = req.cookies;
+
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ error: 'Token inválido' });
+            }
+
+            const eventDoc = await Event.create({
+                title,
+                description,
+                summary,
+                date,
+                location,
+                cover: newPath,
+                organizer: info.id,
+            });
+
+            res.json({ eventDoc });
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao processar evento', details: err.message });
+    }
+});
+
+// Deletar evento
+app.delete('/event/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ error: 'Token inválido' });
+            }
+
+            const eventDoc = await Event.deleteOne(id);
+            if (!eventDoc) {
+                return res.status(404).json({ error: 'Evento não encontrado' });
+            }
+
+            if (eventDoc.organizer.toString() !== info.id) {
+                return res.status(403).json({ error: 'Acesso negado' });
+            }
+
+            await eventDoc.remove();
+            res.json({ message: 'Evento deletado com sucesso' });
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao deletar evento', details: err.message });
+    }
+});
+
+
+app.get('/event', async (req, res) => {
+    res.json(await Event.find()
+        .populate('organizer', ['username'])
+        .sort({ createdAt: -1 })
+        .limit(20)
+    );
+});
+
+app.get('/event/:id', async (req, res) => {
+    const { id } = req.params;
+    const eventDoc = await Event.findById(id).populate('organizer', ['username']);
+    res.json(eventDoc);
+});
+
+app.put('/event/:id', uploadMiddleware.single('file'), async (req, res) => {
+    const { id } = req.params;
+    const { title, description, summary, date, location } = req.body;
+    let newPath = null;
+
+    if (req.file) {
+        const { originalname, path: tempPath } = req.file;
+        const ext = originalname.split('.').pop();
+        newPath = `${tempPath}.${ext}`;
+        fs.renameSync(tempPath, newPath);
+    }
+
+    try {
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ error: 'Token inválido' });
+            }
+
+            const eventDoc = await Event.findById(id);
+            if (!eventDoc) {
+                return res.status(404).json({ error: 'Evento não encontrado' });
+            }
+
+            if (eventDoc.organizer.toString() !== info.id) {
+                return res.status(403).json({ error: 'Acesso negado' });
+            }
+
+            eventDoc.title = title;
+            eventDoc.description = description;
+            eventDoc.summary = summary;
+            eventDoc.date = date;
+            eventDoc.location = location;
+            if (newPath) {
+                eventDoc.cover = newPath;
+            }
+
+            await eventDoc.save();
+            res.json(eventDoc);
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao atualizar evento', details: err.message });
+    }
+});
+
 
 
 app.listen(4000);
