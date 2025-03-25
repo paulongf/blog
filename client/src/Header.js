@@ -31,6 +31,9 @@ export default function Header() {
 
   const username = userInfo?.username;
 
+  // Verifica se o username é "paulongf" ou "teste"
+  const isAuthorizedUser = username === "paulongf" || username === "teste";
+
   return (
     <header>
       <div className="header-container">
@@ -61,14 +64,22 @@ export default function Header() {
                     <Link >Parcerias</Link>
                   </li>
                   <li className="nav-item">
-                    <Link >Eventos</Link>
+                    <Link to="/events">Eventos</Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/contact" >Contacto</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/create" >Create new post</Link>
-                  </li>
+                  {/* Exibe "Create Post" e "Create Event" apenas para usuários autorizados */}
+                  {isAuthorizedUser && (
+                    <>
+                      <li className="nav-item">
+                        <Link to="/create">Create new post</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link to="/create-event">Create new event</Link>
+                      </li>
+                    </>
+                  )}
                   <li className="nav-item">
                     <Link onClick={logout}>Logout</Link>
                   </li>
@@ -82,7 +93,7 @@ export default function Header() {
                     <Link >Parcerias</Link>
                   </li>
                   <li className="nav-item">
-                    <Link >Eventos</Link>
+                    <Link to="/events">Eventos</Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/contact" >Contacto</Link>
