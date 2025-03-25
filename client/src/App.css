@@ -415,11 +415,13 @@ div.post-page a.edit-btn{
   background-color: #333;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   color: #fff;
   padding:10px 20px;
   border-radius: 5px;
   text-decoration: none;
+  width: 200px;
 }
 
 .event-address{
@@ -436,15 +438,17 @@ div.post-page a.edit-btn{
   align-items: center;
 }
 
-.delete-btn{
+.delete-post-btn{
   background-color: red;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   color: #fff !important;
   padding:10px 20px;
   border-radius: 5px;
   text-decoration: none !important;
+  width: 200px;
 }
 a svg{
   height:20px;
