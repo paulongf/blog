@@ -365,6 +365,8 @@ div.post .image {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 8px;  
+  border-top-right-radius: 8px;
 }
 
 div.post .image img {
@@ -372,8 +374,7 @@ div.post .image img {
   height: 100%;
   object-fit: cover; /* Garante que a imagem cubra o espaço sem distorção */
   object-position: center;
-  border-top-left-radius: 8px;  
-  border-top-right-radius: 8px;
+
 }
 
 div.post-page a{

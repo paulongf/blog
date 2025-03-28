@@ -5,7 +5,7 @@ export default function IntroHome(){
         <div className="texts-intro">
         <h1 className="title-home">PALMEIRAS PORTO</h1>
         <h4 className="subtitle-home">Transformando a lealdade em padrão.</h4>
-        <p className="text-home"><b>MISSÃO</b>:
+        <p className="text-home"><span style={{ fontSize: '2em', fontWeight: 'bold' }}>M</span>issão:
                      o objetivo do Palmeiras Porto é conseguir reunir
                     cada vez mais palmeirenses em nossa cidade
                     para fazermos amizades, torcermos juntos e
