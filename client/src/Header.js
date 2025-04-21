@@ -6,7 +6,7 @@ export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    fetch('https://palmeirasporto-backend.onrender.com/profile', {
+    fetch('http://localhost:4000/profile', {
       credentials: 'include',
     })
       .then((response) => {
@@ -22,7 +22,7 @@ export default function Header() {
   }, []);
 
   function logout() {
-    fetch('https://palmeirasporto-backend.onrender.com/logout', {
+    fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST',
     });
@@ -102,7 +102,7 @@ export default function Header() {
                     <Link to="/login" >Login</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/register">Registrar</Link>
+                    <Link to="/register">Register</Link>
                   </li>
                 </>
               )}
