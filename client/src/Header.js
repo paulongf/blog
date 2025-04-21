@@ -73,10 +73,10 @@ export default function Header() {
                   {isAuthorizedUser && (
                     <>
                       <li className="nav-item">
-                        <Link to="/create">Create new post</Link>
+                        <Link to="/create">Criar Postagem</Link>
                       </li>
                       <li className="nav-item">
-                        <Link to="/create-event">Create new event</Link>
+                        <Link to="/create-event">Criar Evento</Link>
                       </li>
                     </>
                   )}
@@ -102,7 +102,7 @@ export default function Header() {
                     <Link to="/login" >Login</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/register">Register</Link>
+                    <Link to="/register">Registrar</Link>
                   </li>
                 </>
               )}
